@@ -4,6 +4,7 @@ public class Node {
 	
 	
 	 
+	private Node parent;
 	private Node prev;
 	private Node next;
 	private String color;
@@ -13,6 +14,13 @@ public class Node {
 	private int availableFlowEntries;
 	
 	
+	
+	public Node getParent() {
+		return parent;
+	}
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
 	public Node getPrev() {
 		return prev;
 	}
