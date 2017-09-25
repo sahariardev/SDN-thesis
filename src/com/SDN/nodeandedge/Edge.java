@@ -8,6 +8,18 @@ public class Edge {
 	private int wight;
 	private int available_bandwidth;
 	
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
+	}
+	public String getTo() {
+		return to;
+	}
+	public void setTo(String to) {
+		this.to = to;
+	}
 	@Override
 	public String toString() {
 		return "Edge [from=" + from + ", to=" + to + ", wight=" + wight + ", available_bandwidth=" + available_bandwidth

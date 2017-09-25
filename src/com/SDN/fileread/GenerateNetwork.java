@@ -9,12 +9,57 @@ import com.SDN.nodeandedge.Node;
 
 public class GenerateNetwork {
 	
+	
+	private Node allnodes[];
+	private Edge alledges[];
+	private Node source;
+	private Node dest;
+	
+	
+	public Node getDest() {
+		return dest;
+	}
+
+	public void setDest(Node dest) {
+		this.dest = dest;
+	}
+
+	public Node getSource() {
+		return source;
+	}
+
+	public void setSource(Node source) {
+		this.source = source;
+	}
+
+	public Node[] getAllnodes() {
+		return allnodes;
+	}
+
+	public void setAllnodes(Node[] allnodes) {
+		this.allnodes = allnodes;
+	}
+
+	public Edge[] getAlledges() {
+		return alledges;
+	}
+
+	public void setAlledges(Edge[] alledges) {
+		this.alledges = alledges;
+	}
+
 	public static void main(String [] args)
 	{
 		GenerateNetwork g=new GenerateNetwork();
 		g.genereate();
 	}
 	
+	public GenerateNetwork() {
+		
+		GenerateNetwork g=new GenerateNetwork();
+		g.genereate();
+	}
+
 	public void genereate()
 	{
 		File f=new File("input.txt");
@@ -90,6 +135,9 @@ public class GenerateNetwork {
 			{
 				System.out.println(edges[i]);
 			}
+			allnodes=nodes;
+			alledges=edges;
+			
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
