@@ -13,17 +13,25 @@ public class Djkastra {
 	 public PriorityQueue<Node> q;
 	 public Node nodes[];
 	 public Edge edges[];
+	 
+	 public static void main(String [] args)
+	 {
+		 Djkastra d=new Djkastra();
+		 d.run();
+		 
+	 }
 
 	 public Node[] init (Node allnodes[], Node source)
 	 {
 		 
 		 for(int c=0;c<allnodes.length;c++)
 		 {
-			 allnodes[c].setTotalValue(100000);
+			 allnodes[c].setValue(100000);
 			 allnodes[c].setParent(null);
 			 if(allnodes[c].equals(source))
 			 {
-				 allnodes[c].setTotalValue(0);
+				 
+				 allnodes[c].setValue(0);
 			 }
 			 
 		 }
@@ -47,27 +55,30 @@ public class Djkastra {
 			 }
 			 if(nodes[c].getIdname().equals(w.getTo()))
 			 {
-				 u=c;
+				 v=c;
 			 }
 		 }
-		 
+		 //System.out.println(nodes[u]);
 		 if(nodes[v].getValue()>nodes[u].getValue()+w.getWight())
 		 {
+			 
 			 nodes[v].setValue(nodes[u].getValue()+w.getWight());
 			 nodes[v].setParent(nodes[u]);
 		 }
-		 
+		 System.out.println(nodes[v]);
 		 
 		 
 	 }
 	 
 	 public void run()
 	 {
-		 Djkastra djkastra=new Djkastra();
+		
 		 
 		 GenerateNetwork g=new GenerateNetwork();
+		 
 		 Node source=g.getSource();
-		 nodes=djkastra.init(g.getAllnodes(),source);
+		 System.out.println("Source is "+source);
+		 nodes=init(g.getAllnodes(),source);
 		 edges=g.getAlledges();
 		 
 		 
@@ -76,36 +87,60 @@ public class Djkastra {
 		 q=new PriorityQueue<Node>(nodes.length,c);
 		 
 		 updateQueue();
-		 
+		 int testing=0;
 		 while(!q.isEmpty())
 		 {
+			 testing++;
+			 //if(testing==2) break;
+				 
 			 Node u=q.poll();
+			 System.out.println();
 			 u.setColor("Gray");
+			 
+			 System.out.println("-----------All vertexes adjecent to "+u.getIdname()+"----------"+u.getColor());
 			 for(int i=0;i<edges.length;i++)
 			 {
-				 if(edges[i].getFrom().equals(u.getIdname()))
-				 {
-					try {
-						Node v= findNodeByName(edges[i].getTo());
-						
-						v.setColor("blue");
-						Edge w=getTheEdge(u,v);
-						
-						
-						
-						
-					} catch (NodeNotFound e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				 }
+				 try {
+					if(edges[i].getFrom().equals(u.getIdname()) && !findNodeByName(edges[i].getTo()).getColor().equals("Gray"))
+					 {
+						try {
+							System.out.println("---------------------");
+							Node v= findNodeByName(edges[i].getTo());
+							System.out.println(i+"Edge is "+v.getIdname()+" Edge weight is "+edges[i].getWight());
+							
+							
+							v.setColor("blue");
+							
+							relax(edges[i]);
+							updateQueue();
+							System.out.println("---------------------");
+							
+							
+							
+							
+						} catch (NodeNotFound e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					 }
+				} catch (NodeNotFound e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			 }
+			 System.out.println(" q size is "+q.size());
+			 System.out.println("---------------------");
+			 
+			
 			 
 		 }
 		 
 		
 		 
-	    
+		 for(int i=0;i<nodes.length;i++)
+			{
+				System.out.println(nodes[i]);
+			}
 		  
 		 
 		 
@@ -117,10 +152,16 @@ public class Djkastra {
 		 {
 			 if(nodes[c].getColor().equals("Gray"))
 			 {
-				 continue;
+				
+				 
 			 }
-			 q.add(nodes[c]);
+			 else
+			 {
+				 q.add(nodes[c]);	 
+			 }
+			 
 		 }
+		 
 	 }
 	 public Node findNodeByName(String s) throws NodeNotFound
 	 {
@@ -138,8 +179,9 @@ public class Djkastra {
 		 
 			 for(int c=0;c<edges.length;c++)
 			 {
-				 if(edges[c].getFrom().equals(u.getIdname()) && edges[c].getTo().equals(v.getIdname()))
+				 if(edges[c].getFrom().equals(u.getIdname()) && edges[c].getTo().equals(v.getIdname()) && !findNodeByName(edges[c].getTo()).getColor().equals("Gray") )
 				 {
+					 System.out.println(findNodeByName(edges[c].getTo()).getColor());
 					 return edges[c];
 				 }
 			 }
@@ -167,10 +209,10 @@ class Stringcomperator implements Comparator<Node>
         }
         if (x.getValue() > y.getValue())
         {
-        	System.out.println("here 2");
+        	//System.out.println("here 2");
             return 1;
         }
-        System.out.println("here 3");
+        
         return 0;
 	}
 }

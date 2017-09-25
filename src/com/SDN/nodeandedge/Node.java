@@ -63,10 +63,12 @@ public class Node {
 	public void setAvailableFlowEntries(int availableFlowEntries) {
 		this.availableFlowEntries = availableFlowEntries;
 	}
+	
 	@Override
 	public String toString() {
-		return "Node [prev=" + prev + ", next=" + next + ", color=" + color + ", value=" + value + ", totalValue="
-				+ totalValue + ", idname=" + idname + ", availableFlowEntries=" + availableFlowEntries + "]";
+		return "Node [parent=" + parent + ", prev=" + prev + ", next=" + next + ", color=" + color + ", value=" + value
+				+ ", totalValue=" + totalValue + ", idname=" + idname + ", availableFlowEntries=" + availableFlowEntries
+				+ "]";
 	}
 	public Node(String idname, int availableFlowEntries) {
 		

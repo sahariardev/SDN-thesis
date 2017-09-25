@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import com.SDN.algo.Djkastra;
 import com.SDN.nodeandedge.Edge;
 import com.SDN.nodeandedge.Node;
+import com.SDN.nodeandedge.NodeNotFound;
 
 public class GenerateNetwork {
 	
@@ -14,6 +16,8 @@ public class GenerateNetwork {
 	private Edge alledges[];
 	private Node source;
 	private Node dest;
+	private String s1;
+	private String d1;
 	
 	
 	public Node getDest() {
@@ -25,7 +29,18 @@ public class GenerateNetwork {
 	}
 
 	public Node getSource() {
-		return source;
+	   
+		
+		Djkastra d=new Djkastra();
+		
+		for(int c=0;c<allnodes.length;c++)
+		 {
+			 if(allnodes[c].getIdname().equals(s1))
+			 {
+				 return allnodes[c]; 
+			 }
+		 }
+		return null;
 	}
 
 	public void setSource(Node source) {
@@ -48,16 +63,16 @@ public class GenerateNetwork {
 		this.alledges = alledges;
 	}
 
-	public static void main(String [] args)
+	/*public static void main(String [] args)
 	{
 		GenerateNetwork g=new GenerateNetwork();
 		g.genereate();
-	}
+	}*/
 	
 	public GenerateNetwork() {
 		
-		GenerateNetwork g=new GenerateNetwork();
-		g.genereate();
+		
+		genereate();
 	}
 
 	public void genereate()
@@ -74,21 +89,30 @@ public class GenerateNetwork {
 			if(sc.hasNextLine())
 			{
 				numberofnodes=sc.nextInt();
-				System.out.println(numberofnodes);
+				//System.out.println(numberofnodes);
 				sc.nextLine();
 			}
-			
+			if(sc.hasNextLine())
+			{
+				s1=sc.nextLine();
+				//System.out.println(s1);
+			}
+			if(sc.hasNextLine())
+			{
+				d1=sc.nextLine();
+				//System.out.println(d1);
+			}
 			
 			if(sc.hasNextLine())
 			{
 				nodesLine=sc.nextLine();
-				System.out.println(nodesLine);
+				//System.out.println(nodesLine);
 			}
 			
 			if(sc.hasNextLine())
 			{
 				numberofedges=sc.nextInt();
-				System.out.println(numberofedges);
+				//System.out.println(numberofedges);
 				sc.nextLine();
 			}
 			
@@ -103,7 +127,7 @@ public class GenerateNetwork {
 				
 				
 				//spliting using space and setting the properties of edge useing constructor 
-				edges[c]=new Edge(edgeDetail[0],edgeDetail[1],Integer.parseInt(edgeDetail[3]),Integer.parseInt(edgeDetail[3]));
+				edges[c]=new Edge(edgeDetail[0],edgeDetail[1],Integer.parseInt(edgeDetail[2]),Integer.parseInt(edgeDetail[3]));
 				
 				c++;
 			}
@@ -122,7 +146,7 @@ public class GenerateNetwork {
 			}
 			
 			
-			for(int i=0;i<nodes.length;i++)
+		/*	for(int i=0;i<nodes.length;i++)
 			{
 				System.out.println(nodes[i]);
 			}
@@ -134,7 +158,7 @@ public class GenerateNetwork {
 			for(int i=0;i<edges.length;i++)
 			{
 				System.out.println(edges[i]);
-			}
+			}*/
 			allnodes=nodes;
 			alledges=edges;
 			
