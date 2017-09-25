@@ -1,13 +1,10 @@
-package com.SDN.fileread;
+package com.SDN.nodeandedge;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import com.SDN.algo.Djkastra;
-import com.SDN.nodeandedge.Edge;
-import com.SDN.nodeandedge.Node;
-import com.SDN.nodeandedge.NodeNotFound;
 
 public class GenerateNetwork {
 	

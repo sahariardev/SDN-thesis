@@ -3,9 +3,8 @@ package com.SDN.algo;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-
-import com.SDN.fileread.GenerateNetwork;
 import com.SDN.nodeandedge.Edge;
+import com.SDN.nodeandedge.GenerateNetwork;
 import com.SDN.nodeandedge.Node;
 import com.SDN.nodeandedge.NodeNotFound;
 
