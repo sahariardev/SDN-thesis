@@ -26,11 +26,13 @@ public class Djkastra {
 		 for(int c=0;c<allnodes.length;c++)
 		 {
 			 allnodes[c].setValue(100000);
+			 allnodes[c].setPathcapacity(100000);
 			 allnodes[c].setParent(null);
 			 if(allnodes[c].equals(source))
 			 {
 				 
 				 allnodes[c].setValue(0);
+				 
 			 }
 			 
 		 }
@@ -62,9 +64,23 @@ public class Djkastra {
 		 {
 			 
 			 nodes[v].setValue(nodes[u].getValue()+w.getWight());
+			 
+			 nodes[v].setPathcapacity((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity());
+			 nodes[v].setAvailableFlowEntries((nodes[v].getAvailableFlowEntries()<nodes[u].getAvailableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getAvailableFlowEntries() );
 			 nodes[v].setParent(nodes[u]);
 		 }
-		 System.out.println(nodes[v]);
+		 else if((nodes[v].getValue()==nodes[u].getValue()+w.getWight()) && (nodes[v].getPathcapacity()<((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity())))
+		 {
+			 nodes[v].setPathcapacity((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity());
+			 nodes[v].setAvailableFlowEntries((nodes[v].getAvailableFlowEntries()<nodes[u].getAvailableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getAvailableFlowEntries() );
+		 }
+		 else if((nodes[v].getValue()==nodes[u].getValue()+w.getWight()) && (nodes[v].getPathcapacity()==((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity())))
+		 {
+			 
+		 }
+			 
+		 
+		 System.out.println(nodes[v]+"---------");
 		 
 		 
 	 }

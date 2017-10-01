@@ -6,7 +6,10 @@ public class Edge {
 	private String from;
 	private String to;
 	private int wight;
+	
+	//it is the bottlenect bandwidth
 	private int available_bandwidth;
+	
 	
 	public String getFrom() {
 		return from;

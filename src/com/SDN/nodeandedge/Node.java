@@ -12,9 +12,17 @@ public class Node {
 	private int totalValue;
 	private String idname;
 	private int availableFlowEntries;
+    private int pathcapacity;
 	
 	
 	
+	
+	public int getPathcapacity() {
+		return pathcapacity;
+	}
+	public void setPathcapacity(int pathcapacity) {
+		this.pathcapacity = pathcapacity;
+	}
 	public Node getParent() {
 		return parent;
 	}
@@ -64,11 +72,14 @@ public class Node {
 		this.availableFlowEntries = availableFlowEntries;
 	}
 	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Node [parent=" + parent + ", prev=" + prev + ", next=" + next + ", color=" + color + ", value=" + value
 				+ ", totalValue=" + totalValue + ", idname=" + idname + ", availableFlowEntries=" + availableFlowEntries
-				+ "]";
+				+ ", pathcapacity=" + pathcapacity + "]";
 	}
 	public Node(String idname, int availableFlowEntries) {
 		
@@ -77,6 +88,7 @@ public class Node {
 		this.idname = idname;
 		this.availableFlowEntries = availableFlowEntries;
 	}
+	
 	
 
 	
