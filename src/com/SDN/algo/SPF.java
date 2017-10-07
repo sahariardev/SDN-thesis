@@ -8,17 +8,12 @@ import com.SDN.nodeandedge.GenerateNetwork;
 import com.SDN.nodeandedge.Node;
 import com.SDN.nodeandedge.NodeNotFound;
 
-public class Djkastra {
+public class SPF {
 	 public PriorityQueue<Node> q;
 	 public Node nodes[];
 	 public Edge edges[];
 	 
-	 public static void main(String [] args)
-	 {
-		 Djkastra d=new Djkastra();
-		 d.run();
-		 
-	 }
+	
 
 	 public Node[] init (Node allnodes[], Node source)
 	 {
@@ -26,12 +21,16 @@ public class Djkastra {
 		 for(int c=0;c<allnodes.length;c++)
 		 {
 			 allnodes[c].setValue(100000);
-			 allnodes[c].setPathcapacity(100000);
+			 allnodes[c].setPathcapacity(0);
+			 allnodes[c].setMin_availableFlowEntries(0);
 			 allnodes[c].setParent(null);
+			 allnodes[c].setColor("white");
 			 if(allnodes[c].equals(source))
 			 {
 				 
 				 allnodes[c].setValue(0);
+				 allnodes[c].setPathcapacity(100000);
+				 allnodes[c].setMin_availableFlowEntries(100000);
 				 
 			 }
 			 
@@ -59,6 +58,9 @@ public class Djkastra {
 				 v=c;
 			 }
 		 }
+		 
+		 
+		 
 		 //System.out.println(nodes[u]);
 		 if(nodes[v].getValue()>nodes[u].getValue()+w.getWight())
 		 {
@@ -66,17 +68,19 @@ public class Djkastra {
 			 nodes[v].setValue(nodes[u].getValue()+w.getWight());
 			 
 			 nodes[v].setPathcapacity((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity());
-			 nodes[v].setAvailableFlowEntries((nodes[v].getAvailableFlowEntries()<nodes[u].getAvailableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getAvailableFlowEntries() );
+			 nodes[v].setMin_availableFlowEntries((nodes[v].getAvailableFlowEntries()<nodes[u].getMin_availableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getMin_availableFlowEntries() );
 			 nodes[v].setParent(nodes[u]);
 		 }
 		 else if((nodes[v].getValue()==nodes[u].getValue()+w.getWight()) && (nodes[v].getPathcapacity()<((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity())))
 		 {
 			 nodes[v].setPathcapacity((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity());
-			 nodes[v].setAvailableFlowEntries((nodes[v].getAvailableFlowEntries()<nodes[u].getAvailableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getAvailableFlowEntries() );
+			 nodes[v].setMin_availableFlowEntries((nodes[v].getAvailableFlowEntries()<nodes[u].getMin_availableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getMin_availableFlowEntries() );
 		 }
-		 else if((nodes[v].getValue()==nodes[u].getValue()+w.getWight()) && (nodes[v].getPathcapacity()==((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity())))
+		 else if((nodes[v].getValue()==nodes[u].getValue()+w.getWight()) && (nodes[v].getPathcapacity()==((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity())) && (nodes[u].getMin_availableFlowEntries()<((nodes[v].getAvailableFlowEntries()<nodes[u].getMin_availableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getMin_availableFlowEntries())))
 		 {
 			 
+			 nodes[v].setPathcapacity((nodes[u].getPathcapacity()>w.getVailable_bandwidth()) ? w.getVailable_bandwidth() : nodes[u].getPathcapacity());
+			 nodes[v].setMin_availableFlowEntries((nodes[v].getAvailableFlowEntries()<nodes[u].getMin_availableFlowEntries()) ? nodes[v].getAvailableFlowEntries() : nodes[u].getMin_availableFlowEntries() );
 		 }
 			 
 		 
@@ -85,16 +89,17 @@ public class Djkastra {
 		 
 	 }
 	 
-	 public void run()
+	 public void run(Node s,Node graphallnodes[],Edge graphalledges[])
 	 {
 		
 		 
-		 GenerateNetwork g=new GenerateNetwork();
 		 
-		 Node source=g.getSource();
+		 
+		 Node source=s;
 		 System.out.println("Source is "+source);
-		 nodes=init(g.getAllnodes(),source);
-		 edges=g.getAlledges();
+		 
+		 nodes=init(graphallnodes,source);
+		 edges=graphalledges;
 		 
 		 
 		 //initializing priority queue 
@@ -109,7 +114,7 @@ public class Djkastra {
 			 //if(testing==2) break;
 				 
 			 Node u=q.poll();
-			 System.out.println();
+			 
 			 u.setColor("Gray");
 			 
 			 System.out.println("-----------All vertexes adjecent to "+u.getIdname()+"----------"+u.getColor());

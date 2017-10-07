@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import com.SDN.algo.Djkastra;
+import com.SDN.algo.SPF;
 
 public class GenerateNetwork {
 	
@@ -28,7 +28,7 @@ public class GenerateNetwork {
 	public Node getSource() {
 	   
 		
-		Djkastra d=new Djkastra();
+		SPF d=new SPF();
 		
 		for(int c=0;c<allnodes.length;c++)
 		 {

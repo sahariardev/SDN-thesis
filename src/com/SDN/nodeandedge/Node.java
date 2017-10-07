@@ -12,11 +12,20 @@ public class Node {
 	private int totalValue;
 	private String idname;
 	private int availableFlowEntries;
+	private int min_availableFlowEntries;
     private int pathcapacity;
 	
+    
+    
 	
 	
 	
+	public int getMin_availableFlowEntries() {
+		return min_availableFlowEntries;
+	}
+	public void setMin_availableFlowEntries(int min_availableFlowEntries) {
+		this.min_availableFlowEntries = min_availableFlowEntries;
+	}
 	public int getPathcapacity() {
 		return pathcapacity;
 	}
@@ -75,11 +84,15 @@ public class Node {
 	
 	
 	
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Node [parent=" + parent + ", prev=" + prev + ", next=" + next + ", color=" + color + ", value=" + value
-				+ ", totalValue=" + totalValue + ", idname=" + idname + ", availableFlowEntries=" + availableFlowEntries
-				+ ", pathcapacity=" + pathcapacity + "]";
+		return "Node [parent=" + parent + ", prev=" + prev + ", next=" + next + ", color=" + color + ", Cost=" + value
+				+ ", idname=" + idname
+				+ ", min_availableFlowEntries=" + min_availableFlowEntries + ", pathcapacity=" + pathcapacity + "]";
 	}
 	public Node(String idname, int availableFlowEntries) {
 		
