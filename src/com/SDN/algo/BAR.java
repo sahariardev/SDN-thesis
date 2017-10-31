@@ -53,7 +53,7 @@ public class BAR {
 	{
 		
 		  Node source=s;
-		  System.out.println("Source is "+source);
+		  //System.out.println("Source is "+source);
 		 nodes=init(graphallnodes,source);
 		 edges=graphalledges;
 
@@ -100,7 +100,7 @@ public class BAR {
 				//System.out.println(nodes[i]);
 			}
 		 
-		 System.out.println(min);
+		// System.out.println(min);
 		 
 		 int i2=0;
 		 for(Edge e: edges)

@@ -14,6 +14,13 @@ public class Node {
 	private int totalValue;
 	private String idname;
 	private int availableFlowEntries;
+	private int currentflow;
+	public int getCurrentflow() {
+		return currentflow;
+	}
+	public void setCurrentflow(int currentflow) {
+		this.currentflow = currentflow;
+	}
 	private int min_availableFlowEntries;
     private int pathcapacity;
 	
@@ -118,6 +125,8 @@ public class Node {
 		  obj.put("Minimum available flow entries",min_availableFlowEntries);
 		  obj.put("Path capacity", pathcapacity);
 		  obj.put("Hop Count ", hopcount);
+		  obj.put("Remaining flows ", currentflow);
+		  obj.put("Maximum flow entries ",availableFlowEntries);
 		  
 		  
 		  return obj+"";

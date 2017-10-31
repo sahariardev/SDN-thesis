@@ -89,19 +89,19 @@ public class SPF {
 		 }
 			 
 		 
-		 System.out.println(nodes[v]+"---------");
+		// System.out.println(nodes[v]+"---------");
 		 
 		 
 	 }
 	 
-	 public void run(Node s,Node graphallnodes[],Edge graphalledges[])
+	 public Node[] run(Node s,Node graphallnodes[],Edge graphalledges[])
 	 {
 		
 		 
 		 
 		 
 		 Node source=s;
-		 System.out.println("Source is "+source);
+		 //System.out.println("Source is "+source);
 		 
 		 nodes=init(graphallnodes,source);
 		 edges=graphalledges;
@@ -122,23 +122,30 @@ public class SPF {
 			 
 			 u.setColor("Gray");
 			 
-			 System.out.println("-----------All vertexes adjecent to "+u.getIdname()+"----------"+u.getColor());
+			 //System.out.println("-----------All vertexes adjecent to "+u.getIdname()+"----------"+u.getColor());
 			 for(int i=0;i<edges.length;i++)
 			 {
 				 try {
 					if(edges[i].getFrom().equals(u.getIdname()) && !findNodeByName(edges[i].getTo()).getColor().equals("Gray"))
 					 {
 						try {
-							System.out.println("---------------------");
+							//System.out.println("---------------------");
 							Node v= findNodeByName(edges[i].getTo());
-							System.out.println(i+"Edge is "+v.getIdname()+" Edge weight is "+edges[i].getWight());
+							if(v.getCurrentflow()==0)
+							{
+								//do some action 
+								
+								return null;
+							}
+							
+							//System.out.println(i+"Edge is "+v.getIdname()+" Edge weight is "+edges[i].getWight());
 							
 							
 							v.setColor("blue");
 							
 							relax(edges[i]);
 							updateQueue();
-							System.out.println("---------------------");
+							//System.out.println("---------------------");
 							
 							
 							
@@ -153,8 +160,8 @@ public class SPF {
 					e.printStackTrace();
 				}
 			 }
-			 System.out.println(" q size is "+q.size());
-			 System.out.println("---------------------");
+			// System.out.println(" q size is "+q.size());
+			 //System.out.println("---------------------");
 			 
 			
 			 
@@ -172,7 +179,7 @@ public class SPF {
 				//System.out.println(nodes[i]);
 			}
 		 
-		 System.err.println("TOTAL HOP "+avghop);
+		 
 		 
          avghop=Math.ceil(avghop/nodes.length);
          obj.put("Nodes", obj2);
@@ -191,9 +198,9 @@ public class SPF {
 		
 		
 		
-		System.out.println(obj); 
+		//System.out.println(obj); 
 		  
-		 
+		 return nodes;
 		 
 	 }
 	 public void updateQueue()
@@ -232,7 +239,7 @@ public class SPF {
 			 {
 				 if(edges[c].getFrom().equals(u.getIdname()) && edges[c].getTo().equals(v.getIdname()) && !findNodeByName(edges[c].getTo()).getColor().equals("Gray") )
 				 {
-					 System.out.println(findNodeByName(edges[c].getTo()).getColor());
+					 //System.out.println(findNodeByName(edges[c].getTo()).getColor());
 					 return edges[c];
 				 }
 			 }
@@ -253,9 +260,9 @@ class Stringcomperator implements Comparator<Node>
         // which would be more efficient.
         if (x.getValue()< y.getValue())
         {
-        	System.out.println(x);
-        	System.out.println(y);
-        	System.out.println("here 1");
+        	//System.out.println(x);
+        	//System.out.println(y);
+        	//System.out.println("here 1");
         	return -1;
         }
         if (x.getValue() > y.getValue())

@@ -18,7 +18,14 @@ public class GenerateNetwork {
 	
 	
 	public Node getDest() {
-		return dest;
+		for(int c=0;c<allnodes.length;c++)
+		 {
+			 if(allnodes[c].getIdname().equals(d1))
+			 {
+				 return allnodes[c]; 
+			 }
+		 }
+		return null;
 	}
 
 	public void setDest(Node dest) {
@@ -28,7 +35,7 @@ public class GenerateNetwork {
 	public Node getSource() {
 	   
 		
-		SPF d=new SPF();
+		//SPF d=new SPF();
 		
 		for(int c=0;c<allnodes.length;c++)
 		 {
@@ -140,6 +147,7 @@ public class GenerateNetwork {
 				String nodeAndFlowentries[]=singleNodeWithFlowEntries[i].split("@@");
 				//System.out.println(nodeAndFlowentries[0]);
 				nodes[i]=new Node( nodeAndFlowentries[0] , Integer.parseInt(nodeAndFlowentries[1]) );
+				nodes[i].setCurrentflow(nodes[i].getAvailableFlowEntries());
 			}
 			
 			

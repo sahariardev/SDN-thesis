@@ -13,7 +13,7 @@ public class AlgoDriver {
 		GenerateNetwork g=new GenerateNetwork();
 		 
 		Node source=g.getSource();
-		
+		Node dest=g.getDest();
 		Node nodes[]=g.getAllnodes();
 		Edge edges[]=g.getAlledges();
 		
@@ -22,11 +22,54 @@ public class AlgoDriver {
 		
 		BAR bar=new BAR();
 		edges=bar.run(source,nodes,edges);
-
-		spf.run(source,nodes,edges);
+ 
 		
+	    Node [] previousnodes=nodes;
+	    int numberofpacketloss=0;
+	    for (int c=0;c<200;c++)
+	    {
+	    	previousnodes=nodes;
+	    	nodes=spf.run(source,nodes,edges);
+	    	if(nodes==null)
+	    	{
+	    		//System.out.println("Packet loss ");
+	    		numberofpacketloss++;
+	    		nodes=previousnodes;
+	    	}
+	    	else
+	    	{
+	    		//updating the network information
+	    	
+	    		Node n=dest;
+	    		while(true)
+	    		{
+	    			if(n==null)
+	    			{
+	    				break;
+	    			}
+	    			
+	    			
+	    			for(int i=0;i<nodes.length;i++)
+	    			{
+	    				if(nodes[i].equals(n))
+	    				{
+	    					
+	    					nodes[i].setCurrentflow(nodes[i].getCurrentflow()-1);
+	    				}
+	    			}
+	    			n=n.getParent();
+	    		}
+	    		
+	    	}
+	    }
+	    
+	    
+	    for(Node n:nodes)
+	    {
+	    	System.out.println(n);
+	    }
 		
-		
+		System.out.println(numberofpacketloss+" are the number of packet lost");
 		
 		
 
