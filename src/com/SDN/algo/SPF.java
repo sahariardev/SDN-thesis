@@ -1,14 +1,19 @@
 package com.SDN.algo;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.SDN.nodeandedge.Edge;
-import com.SDN.nodeandedge.GenerateNetwork;
 import com.SDN.nodeandedge.Node;
 import com.SDN.nodeandedge.NodeNotFound;
 
 public class SPF {
+	 //testing comment
 	 public PriorityQueue<Node> q;
 	 public Node nodes[];
 	 public Edge edges[];
@@ -156,11 +161,37 @@ public class SPF {
 		 }
 		 
 		
-		 
+		 JSONObject obj = new JSONObject();
+		 JSONArray obj2 = new JSONArray();
+		 double avghop=0;
 		 for(int i=0;i<nodes.length;i++)
 			{
-				System.out.println(nodes[i]);
+			    nodes[i].setHopcount();
+			    avghop=avghop+nodes[i].getHopcount();
+			    obj2.add(nodes[i]);
+				//System.out.println(nodes[i]);
 			}
+		 
+		 System.err.println("TOTAL HOP "+avghop);
+		 
+         avghop=Math.ceil(avghop/nodes.length);
+         obj.put("Nodes", obj2);
+		 obj.put("Source", source);
+		 obj.put("Average hop count", avghop);
+		 try (FileWriter file = new FileWriter("f:\\output.json")) {
+
+	            file.write(obj.toJSONString());
+	            file.flush();
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } 
+		 
+		
+		
+		
+		
+		System.out.println(obj); 
 		  
 		 
 		 

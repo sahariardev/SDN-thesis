@@ -1,5 +1,7 @@
 package com.SDN.nodeandedge;
 
+import org.json.simple.JSONObject;
+
 public class Node {
 	
 	
@@ -15,11 +17,26 @@ public class Node {
 	private int min_availableFlowEntries;
     private int pathcapacity;
 	
+    private int hopcount=0;
     
-    
 	
 	
 	
+	public int getHopcount() {
+		setHopcount();
+		return hopcount;
+	}
+	public void setHopcount() {
+		if(parent==null)
+		{
+			hopcount=0;
+		}
+		else
+		{
+			hopcount=parent.getHopcount()+1;
+		}
+		
+	}
 	public int getMin_availableFlowEntries() {
 		return min_availableFlowEntries;
 	}
@@ -90,9 +107,23 @@ public class Node {
 	
 	@Override
 	public String toString() {
-		return "Node [parent=" + parent + ", prev=" + prev + ", next=" + next + ", color=" + color + ", Cost=" + value
+		/*return "Node [parent=" + parent + ", prev=" + prev + ", next=" + next + ", color=" + color + ", Cost=" + value
 				+ ", idname=" + idname
-				+ ", min_availableFlowEntries=" + min_availableFlowEntries + ", pathcapacity=" + pathcapacity + "]";
+				+ ", min_availableFlowEntries=" + min_availableFlowEntries + ", pathcapacity=" + pathcapacity + "]";*/
+		
+		  JSONObject obj = new JSONObject();
+		  obj.put("Node name",idname);
+		  obj.put("Parent node", parent);
+		  obj.put("Cost from source", value);
+		  obj.put("Minimum available flow entries",min_availableFlowEntries);
+		  obj.put("Path capacity", pathcapacity);
+		  obj.put("Hop Count ", hopcount);
+		  
+		  
+		  return obj+"";
+				
+		
+		
 	}
 	public Node(String idname, int availableFlowEntries) {
 		
