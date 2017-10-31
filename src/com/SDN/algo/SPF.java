@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import com.SDN.nodeandedge.Edge;
 import com.SDN.nodeandedge.Node;
 import com.SDN.nodeandedge.NodeNotFound;
+import com.SDN.nodeandedge.ResetFlow;
 
 public class SPF {
 	 //testing comment
@@ -133,7 +134,15 @@ public class SPF {
 							Node v= findNodeByName(edges[i].getTo());
 							if(v.getCurrentflow()==0)
 							{
-								//do some action 
+								for(int c3=0;c3<nodes.length;c3++)
+								{
+									if(nodes[c3].equals(v))
+									{
+										ResetFlow r=new ResetFlow(nodes[c3]);
+										nodes[c3]=r.clearBuffer();
+										break;
+									}
+								}
 								
 								return null;
 							}

@@ -29,38 +29,45 @@ public class AlgoDriver {
 	    for (int c=0;c<200;c++)
 	    {
 	    	previousnodes=nodes;
-	    	nodes=spf.run(source,nodes,edges);
-	    	if(nodes==null)
-	    	{
-	    		//System.out.println("Packet loss ");
-	    		numberofpacketloss++;
-	    		nodes=previousnodes;
-	    	}
-	    	else
-	    	{
-	    		//updating the network information
+	    	try {
+				Thread.sleep(10);
+				nodes=spf.run(source,nodes,edges);
+		    	if(nodes==null)
+		    	{
+		    		//System.out.println("Packet loss ");
+		    		numberofpacketloss++;
+		    		nodes=previousnodes;
+		    	}
+		    	else
+		    	{
+		    		//updating the network information
+		    	
+		    		Node n=dest;
+		    		while(true)
+		    		{
+		    			if(n==null)
+		    			{
+		    				break;
+		    			}
+		    			
+		    			
+		    			for(int i=0;i<nodes.length;i++)
+		    			{
+		    				if(nodes[i].equals(n))
+		    				{
+		    					
+		    					nodes[i].setCurrentflow(nodes[i].getCurrentflow()-1);
+		    				}
+		    			}
+		    			n=n.getParent();
+		    		}
+		    		
+		    	}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	
-	    		Node n=dest;
-	    		while(true)
-	    		{
-	    			if(n==null)
-	    			{
-	    				break;
-	    			}
-	    			
-	    			
-	    			for(int i=0;i<nodes.length;i++)
-	    			{
-	    				if(nodes[i].equals(n))
-	    				{
-	    					
-	    					nodes[i].setCurrentflow(nodes[i].getCurrentflow()-1);
-	    				}
-	    			}
-	    			n=n.getParent();
-	    		}
-	    		
-	    	}
 	    }
 	    
 	    
