@@ -134,6 +134,12 @@ public class SPF {
 							Node v= findNodeByName(edges[i].getTo());
 							if(v.getCurrentflow()==0)
 							{
+								
+								
+								return null;
+							}
+							else if(v.getCurrentflow()==1)
+							{
 								for(int c3=0;c3<nodes.length;c3++)
 								{
 									if(nodes[c3].equals(v))
@@ -143,10 +149,7 @@ public class SPF {
 										break;
 									}
 								}
-								
-								return null;
 							}
-							
 							//System.out.println(i+"Edge is "+v.getIdname()+" Edge weight is "+edges[i].getWight());
 							
 							
@@ -177,31 +180,7 @@ public class SPF {
 		 }
 		 
 		
-		 JSONObject obj = new JSONObject();
-		 JSONArray obj2 = new JSONArray();
-		 double avghop=0;
-		 for(int i=0;i<nodes.length;i++)
-			{
-			    nodes[i].setHopcount();
-			    avghop=avghop+nodes[i].getHopcount();
-			    obj2.add(nodes[i]);
-				//System.out.println(nodes[i]);
-			}
 		 
-		 
-		 
-         avghop=Math.ceil(avghop/nodes.length);
-         obj.put("Nodes", obj2);
-		 obj.put("Source", source);
-		 obj.put("Average hop count", avghop);
-		 try (FileWriter file = new FileWriter("f:\\output.json")) {
-
-	            file.write(obj.toJSONString());
-	            file.flush();
-
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        } 
 		 
 		
 		

@@ -13,8 +13,10 @@ public class ResetFlow extends Thread {
 	{
 		try
 		{
-			Thread.sleep(n.getAvailableFlowEntries()* 1);
+			Thread.sleep(n.getCurrentflow()*2);
+
 			n.setCurrentflow(n.getAvailableFlowEntries());
+	
 		}
 		catch (Exception e)
 		{

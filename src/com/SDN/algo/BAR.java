@@ -103,7 +103,7 @@ public class BAR {
 		 
 		 
 		 
-		 System.out.println("mminimum is "+min);
+		// System.out.println("mminimum is "+min);
 		 
 		 int i2=0;
 		 for(Edge e: edges)
@@ -126,7 +126,7 @@ public class BAR {
 			 }
 		 }
 		 
-		 for(Edge e: edges)
+	/*	 for(Edge e: edges)
 		 {
 			 System.out.println(e);
 		 }
@@ -138,7 +138,7 @@ public class BAR {
 			 System.out.println(e);
 		 }
 		 
-		 
+		*/ 
 		 
 		 
 		  return newEdges;
