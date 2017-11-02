@@ -81,7 +81,7 @@ public class GenerateNetwork {
 
 	public void genereate()
 	{
-		File f=new File("input.txt");
+		File f=new File("graph_v2.txt");
 		
 		int numberofnodes=0;
 		int numberofedges=0;
@@ -150,6 +150,8 @@ public class GenerateNetwork {
 				nodes[i].setCurrentflow(nodes[i].getAvailableFlowEntries());
 			}
 			
+			
+			//System.out.println(nodes.length);
 			
 		/*	for(int i=0;i<nodes.length;i++)
 			{

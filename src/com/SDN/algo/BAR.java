@@ -41,6 +41,7 @@ public class BAR {
 		 if(nodes[v].getPathcapacity()<(nodes[u].getPathcapacity()>w.getVailable_bandwidth() ? w.getVailable_bandwidth() : nodes[u].getPathcapacity()))
 		 {
 			nodes[v].setPathcapacity(nodes[u].getPathcapacity()>w.getVailable_bandwidth() ? w.getVailable_bandwidth() : nodes[u].getPathcapacity()); 
+			System.out.println(nodes[v].getPathcapacity()+" the node name is "+nodes[v].getIdname());
 		 }
 		 
 		 
@@ -100,7 +101,9 @@ public class BAR {
 				//System.out.println(nodes[i]);
 			}
 		 
-		// System.out.println(min);
+		 
+		 
+		 System.out.println("mminimum is "+min);
 		 
 		 int i2=0;
 		 for(Edge e: edges)

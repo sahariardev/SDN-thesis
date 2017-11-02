@@ -21,16 +21,16 @@ public class AlgoDriver {
 		
 		
 		BAR bar=new BAR();
-		edges=bar.run(source,nodes,edges);
+		//edges=bar.run(source,nodes,edges);
  
 		
 	    Node [] previousnodes=nodes;
 	    int numberofpacketloss=0;
-	    for (int c=0;c<200;c++)
+	    for (int c=0;c<1;c++)
 	    {
 	    	previousnodes=nodes;
 	    	try {
-				Thread.sleep(10);
+				Thread.sleep(1);
 				nodes=spf.run(source,nodes,edges);
 		    	if(nodes==null)
 		    	{
@@ -70,15 +70,31 @@ public class AlgoDriver {
 	    	
 	    }
 	    
-	    
+	   /* 
 	    for(Node n:nodes)
 	    {
 	    	System.out.println(n);
-	    }
+	    }*/
 		
+	    Node n=nodes[nodes.length-1];
+	    while(true)
+	    {
+	    	if(n==null)
+	    	{
+	    		break;
+	    	}
+	    	
+	    	System.out.print(n.getIdname()+" ");
+	    	n=n.getParent();
+	    }
+	    System.out.println();
+	    
+	    System.out.println("Hops are "+nodes[nodes.length-1].getHopcount()+"  Cost is "+nodes[nodes.length-1].getValue()+" Path capacity "+nodes[nodes.length-1].getPathcapacity());
 		System.out.println(numberofpacketloss+" are the number of packet lost");
 		
+	    System.out.println(nodes[6]);
 		
+	
 
 	}
 

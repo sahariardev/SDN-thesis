@@ -232,6 +232,7 @@ public class SPF {
 	 }
 	 public Node findNodeByName(String s) throws NodeNotFound
 	 {
+		 
 		 for(int c=0;c<nodes.length;c++)
 		 {
 			 if(nodes[c].getIdname().equals(s))
@@ -239,10 +240,12 @@ public class SPF {
 				 return nodes[c]; 
 			 }
 		 }
+		 System.out.println("here the unfound node name is  "+s);
 		 throw new NodeNotFound();
 	 }
 	 public Edge getTheEdge(Node u,Node v) throws NodeNotFound
 	 {
+		 System.out.println("here 2");
 		 
 			 for(int c=0;c<edges.length;c++)
 			 {
