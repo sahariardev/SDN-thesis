@@ -38,15 +38,18 @@ public class AlgoDriver {
 				
 				
 				
-				
+				JSONObject obj = new JSONObject();
 				if (nodes == null) {
 					// System.out.println("Packet loss ");
 					numberofpacketloss++;
 					nodes = previousnodes;
+                     obj.put("packet transfer", "false");
+					
+					jsarr.add(obj);
 				} else {
 					// updating the network information
 
-					JSONObject obj = new JSONObject();
+					
 					JSONArray obj2 = new JSONArray();
 					double avghop = 0;
 					for (int i = 0; i < nodes.length; i++) {
@@ -60,6 +63,8 @@ public class AlgoDriver {
 					obj.put("Nodes", obj2);
 					obj.put("Source", source);
 					obj.put("Average hop count", avghop);
+					obj.put("packet transfer", "true");
+					
 					jsarr.add(obj);
 					
 

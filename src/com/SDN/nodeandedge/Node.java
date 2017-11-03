@@ -120,7 +120,7 @@ public class Node {
 		
 		  JSONObject obj = new JSONObject();
 		  obj.put("Node name",idname);
-		  obj.put("Parent node", parent);
+		  //obj.put("Parent node", parent);
 		  obj.put("Cost from source", value);
 		  obj.put("Minimum available flow entries",min_availableFlowEntries);
 		  obj.put("Path capacity", pathcapacity);
