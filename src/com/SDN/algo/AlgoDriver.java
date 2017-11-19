@@ -23,14 +23,14 @@ public class AlgoDriver {
 
 		SPF spf = new SPF();
 
-		BAR bar = new BAR();
-		edges=bar.run(source,nodes,edges);
+		//BAR bar = new BAR();
+		//edges=bar.run(source,nodes,edges);
         
 		JSONArray jsarr=new JSONArray();
 		
 		Node[] previousnodes = nodes;
 		int numberofpacketloss = 0;
-		for (int c = 0; c < 100; c++) {
+		for (int c = 0; c < 1; c++) {
 			previousnodes = nodes;
 			try {
 				Thread.sleep(1);

@@ -81,7 +81,7 @@ public class GenerateNetwork {
 
 	public void genereate()
 	{
-		File f=new File("graph_v2.txt");
+		File f=new File("GRAPH-FINALLL.txt");
 		
 		int numberofnodes=0;
 		int numberofedges=0;
