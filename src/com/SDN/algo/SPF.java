@@ -130,9 +130,9 @@ public class SPF {
 					if(edges[i].getFrom().equals(u.getIdname()) && !findNodeByName(edges[i].getTo()).getColor().equals("Gray"))
 					 {
 						try {
-							//System.out.println("---------------------");
+							//System.out.println("-----------Here ----------");
 							Node v= findNodeByName(edges[i].getTo());
-							if(v.getCurrentflow()==0)
+							if(v.getCurrentflow()<=0)////////////////
 							{
 								
 								
@@ -238,6 +238,36 @@ public class SPF {
 			 throw new NodeNotFound();
 		 
 	 }
+        public int ran()
+       {
+           return 0 + (int)(Math.random()*((3-0)+1));
+       }
+       public Edge[] makeRandom(Edge edges2[])
+       {
+    	   Edge edges[]=new Edge[edges2.length];
+    	   for(int c=0;c<edges.length;c++)
+   		{
+   			Edge edg=new Edge(edges2[c].getFrom(),edges2[c].getTo(),edges2[c].getWight(),edges2[c].getVailable_bandwidth());
+   			
+   			//Edge edg=edges2[c].makeClone();
+   			
+   			if(edg==edges2[c])
+   			{
+   				System.out.println("true");
+   			}
+   			edges[c]=edg;
+   		}
+   		
+           
+           for(int c=0;c<edges.length;c++)
+           {
+               //System.out.println("old value "+edges[c].getVailable_bandwidth()+"   "+edges[c].getWight());
+               edges[c].setVailable_bandwidth(new Integer(edges[c].getVailable_bandwidth()+ran()));
+               edges[c].setWight(new Integer(edges[c].getWight()+ran()));
+               //System.out.println("new value "+edges[c].getVailable_bandwidth()+"   "+edges[c].getWight());
+           }
+           return edges;
+       }
 	 
 }
 class Stringcomperator implements Comparator<Node>
@@ -246,22 +276,22 @@ class Stringcomperator implements Comparator<Node>
 	@Override
 	public int compare(Node x, Node  y) {
 		// Assume neither string is null. Real code should
-        // probably be more robust
-        // You could also just return x.length() - y.length(),
-        // which would be more efficient.
-        if (x.getValue()< y.getValue())
-        {
-        	//System.out.println(x);
-        	//System.out.println(y);
-        	//System.out.println("here 1");
-        	return -1;
-        }
-        if (x.getValue() > y.getValue())
-        {
-        	//System.out.println("here 2");
-            return 1;
-        }
-        
-        return 0;
+       // probably be more robust
+       // You could also just return x.length() - y.length(),
+       // which would be more efficient.
+       if (x.getValue()< y.getValue())
+       {
+       	//System.out.println(x);
+       	//System.out.println(y);
+       	//System.out.println("here 1");
+       	return -1;
+       }
+       if (x.getValue() > y.getValue())
+       {
+       	//System.out.println("here 2");
+           return 1;
+       }
+       
+       return 0;
 	}
 }

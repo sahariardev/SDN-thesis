@@ -47,4 +47,16 @@ public class Edge {
 	public void setVailable_bandwidth(int available_bandwidth) {
 		this.available_bandwidth = available_bandwidth;
 	}
+	public Edge makeClone()
+	{
+		 String from1=from;
+		String to1=to;
+		 int wight1=new Integer(wight);
+		 
+
+		 int available_bandwidth1=new Integer(available_bandwidth);
+		
+		Edge e =new Edge(from1,to1,wight1,available_bandwidth1);
+		return e;
+	}
 }
